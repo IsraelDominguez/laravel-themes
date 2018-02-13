@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Genetsis\\Themes\\": "packages/genetsis/themes/src"
+            "Genetsis\\Themes\\": "src"
         }
     }
 }
