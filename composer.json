@@ -1,0 +1,21 @@
+{
+    "name": "genetsis/themes",
+    "description": "Themes and Assets Manager for Laravel based on Assetic and Shipu Themevel",
+    "authors": [
+        {
+            "name": "idominguez",
+            "email": "idominguez@genetsis.com"
+        }
+    ],
+    "type": "library",
+    "version": "dev-master",
+    "require": {
+        "kriswallsmith/assetic": "1.*",
+        "leafo/lessphp": "^0.3.7",
+        "leafo/scssphp": "~0.1",
+        "meenie/javascript-packer": "^1.1",
+        "mrclay/minify": "<2.3",
+        "natxet/cssmin": "3.0.4",
+        "ptachoire/cssembed": "~1.0"
+    }
+}
