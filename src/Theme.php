@@ -225,6 +225,9 @@ class Theme
             }
         } else {
             $fallback = $this->activeTheme.'::'.$splitLang[0];
+            if (!$this->lang->has($fallback)) {
+                $fallback = $splitLang[0];
+            }
         }
 
         return trans($fallback);
