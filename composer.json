@@ -34,8 +34,8 @@
                 "Genetsis\\Themes\\ThemeServiceProvider"
             ],
             "aliases": {
-                "Asset": "Genetsis\\Themes\\Facades\\Asset",
-                "Theme": "Genetsis\\Themes\\Facades\\Theme"
+                "Asset": "Genetsis\\Themes\\Facades\\AssetFacade",
+                "Theme": "Genetsis\\Themes\\Facades\\ThemeFacade"
             }
         }
     }
