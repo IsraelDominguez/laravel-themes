@@ -1,4 +1,4 @@
-<?php namespace Genetsis\Themes;
+    <?php namespace Genetsis\Themes;
 
 use Genetsis\Themes\Exceptions\AssetsException;
 use Genetsis\Themes\Exceptions\ThemeNotFoundException;
@@ -206,6 +206,7 @@ class Theme
         return !$collection ? $this->activeTheme : $this->getThemeInfo($this->activeTheme);
     }
 
+
     /**
      * Get lang content from current theme.
      *
@@ -213,7 +214,7 @@ class Theme
      *
      * @return \Illuminate\Contracts\Translation\Translator|string
      */
-    public function lang($fallback)
+    public function lang($fallback, $replace = [])
     {
         $splitLang = explode('::', $fallback);
 
@@ -230,7 +231,7 @@ class Theme
             }
         }
 
-        return trans($fallback);
+        return trans($fallback, $replace, $this->lang->getLocale());
     }
 
 
