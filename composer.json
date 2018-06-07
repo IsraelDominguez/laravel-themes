@@ -18,9 +18,25 @@
         "natxet/cssmin": "3.0.4",
         "ptachoire/cssembed": "~1.0"
     },
+    "require-dev": {
+        "illuminate/support": "~5.5.0",
+        "illuminate/validation": "~5.5.0",
+        "illuminate/view": "~5.5.0"
+    },
     "autoload": {
         "psr-4": {
             "Genetsis\\Themes\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Genetsis\\Themes\\ThemeServiceProvider"
+            ],
+            "aliases": {
+                "Asset": "Genetsis\\Themes\\Facades\\Asset",
+                "Theme": "Genetsis\\Themes\\Facades\\Theme"
+            }
         }
     }
 }
