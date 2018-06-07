@@ -1,8 +1,8 @@
 <?php namespace Genetsis\Themes\Exceptions;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
-class ThemeNotFoundException extends NotFoundHttpException
+class ThemeNotFoundException extends NotFoundResourceException
 {
     public function __construct($themeName)
     {

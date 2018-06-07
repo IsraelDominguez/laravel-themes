@@ -1,4 +1,4 @@
-    <?php namespace Genetsis\Themes;
+<?php namespace Genetsis\Themes;
 
 use Genetsis\Themes\Exceptions\AssetsException;
 use Genetsis\Themes\Exceptions\ThemeNotFoundException;
