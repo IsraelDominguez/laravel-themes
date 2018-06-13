@@ -99,7 +99,11 @@ class Theme
         $this->publicFolders = config('theme.public_folders', array());
         $this->themes = config('theme.themes', array());
 
-        if (!is_dir($dir = public_path($this->assetsPath))) {
+        if (!is_dir($dir = public_path($this->assetsPath)) && false === @mkdir($dir, 0777, true)) {
+            throw new \RuntimeException('Unable to create directory '.$dir);
+        }
+
+        if (!is_dir($dir)) {
             throw new AssetsException('Unable to locate directory '.$dir);
         }
     }

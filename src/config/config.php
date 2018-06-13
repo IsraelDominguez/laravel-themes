@@ -11,71 +11,26 @@ return array(
     |
      */
     'secure' => false,
-    'md5'    => false,
+    'md5'    => true,
 
-    // Relative to base_path()
-    'themes_path' => 'resources',
-    // Relative to public_path()
-    'public_path' => 'assets',
+    /// Relative to base_path()
+    'themes_path' => base_path('resources'),
 
-    'themes' => array (
-        'public' => array (
-            /*
-            |--------------------------------------------------------------------------
-            | Groups
-            |--------------------------------------------------------------------------
-            |
-            | Groups of assets to run over a set of filters into an output file.
-            | By default, all paths to files begin in the public_path() directory.
-            | The order of asset definition is maintained in the output file.
-            |
-            | Use the Asset::url() function to generate the link to the final file:
-            | <script src="<?php echo Asset::url('main_js'); ?>"></script>
-            |
-             */
-            'groups' => array(
-                'main_js' => array(
-                    'filters' => array(
-                        'js_min',
-                    ),
-                    'assets' => array(                  // Paths relative to resources_path()
-                        'jquery',                       // Named asset defined below
-                        'assets/js/common/search.js',   // Single file
-                        'assets/js/folder/*js',      // Folder inclusion
-                    ),
-                    'output' => '/assets/cache/scripts.js',           // Writable output relative to public_path()
-                ),
-                'main_css' => array(
-                    'filters' => array(
-                        'css_import',
-                        'css_rewrite',
-                        'css_min',
-                    ),
-                    'assets' => array(
-                        'assets/css/bootstrap/css/bootstrap.min.css',
-                        'assets/css/font-awesome/css/font-awesome.css',
-                        'assets/css/prettyPhoto/css/*css',
-                    ),
-                    'output' => '/assets/cache/vendors.css'
-                ),
-                'main_less' => array(
-                    'filters' => array(
-                        'css_import',
-                        'css_rewrite',
-                        'less_php',
-                        'css_min'
-                    ),
-                    'assets' => array(
-                        'assets/less/master.less'
-                    ),
-                    'output' => '/assets/cache/styles.css'
-                ),
-            ),
-        ),
-        'admin' => array (
-        )
+    // Assets path where assets will be published, relative to Publish Path
+    'assets_path' => 'assets',
+
+    'create_symlinks' => true,
+
+    'public_folders' => array (
+        'fonts',
+        'img',
+        'pdf'
     ),
 
+    // Add themes for packages
+    'themes' => array (
+
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -86,7 +41,6 @@ return array(
     | The use of closure based filters are also possible.
     |
      */
-
     'filters' => array(
         'css_min'       => 'Assetic\Filter\CssMinFilter',
         'css_import'    => 'Assetic\Filter\CssImportFilter',
@@ -108,8 +62,8 @@ return array(
     | Name => path key-values for common files to be included in groups.
     |
      */
-
     'assets' => array(
-        'jquery' => 'assets/javascripts/jquery.js',
+        // Sample
+        //'jquery' => 'assets/javascripts/jquery.js',
     )
 );
