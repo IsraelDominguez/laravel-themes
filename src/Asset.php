@@ -256,8 +256,8 @@ class Asset
 
     protected function getConfig($group, $key, $default = null)
     {
-        if ((!$value = config('theme.themes.'.\Theme::current().'.groups.'.$group.'.'.$key, $default))&&(!is_array($value))) {
-            throw new AssetsException('Config value: ' . 'theme.themes.'.\Theme::current().'.groups.'.$group.'.'.$key);
+        if ((!$value = config(\Theme::current().'_theme.'.\Theme::current().'.groups.'.$group.'.'.$key, $default))&&(!is_array($value))) {
+            throw new AssetsException('Config value: ' .\Theme::current().'_theme.'.\Theme::current().'.groups.'.$group.'.'.$key);
         }
 
         return $value;

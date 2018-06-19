@@ -15,7 +15,7 @@
         "leafo/scssphp": "~0.1",
         "meenie/javascript-packer": "^1.1",
         "mrclay/minify": "<2.3",
-        "natxet/cssmin": "3.0.4",
+        "natxet/cssmin": "3.0.6",
         "ptachoire/cssembed": "~1.0"
     },
     "require-dev": {

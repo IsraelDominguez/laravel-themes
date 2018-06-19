@@ -92,7 +92,7 @@ class Theme
         $this->app = $app;
         $this->finder = $finder;
         $this->lang = $lang;
-        $this->themePath = config('theme.themes_path');
+
         $this->assetsPath = config('theme.assets_path');
         //$this->publicPath = public_path(config($this->assetsPath));
         $this->createSymlinks = config('theme.create_symlinks');
@@ -149,9 +149,9 @@ class Theme
      */
     public function set($theme)
     {
-        if (!$this->has($theme)) {
-            throw new ThemeNotFoundException($theme);
-        }
+//        if (!$this->has($theme)) {
+//            throw new ThemeNotFoundException($theme);
+//        }
 
         $this->loadTheme($theme);
         $this->activeTheme = $theme;
@@ -178,6 +178,13 @@ class Theme
      */
     public function getThemeInfo($themeName)
     {
+        // Search inf theme default config
+        if (isset($this->themes[$themeName])) {
+            return $this->themes[$themeName];
+        } else {
+            //Load theme config
+            $this->themes[$themeName] = config($themeName.'_theme.'.$themeName);
+        }
         return isset($this->themes[$themeName]) ? $this->themes[$themeName] : null;
     }
 
@@ -266,9 +273,11 @@ class Theme
             throw new \RuntimeException('Unable to create directory '.$dir);
         }
 
+        $this->themePath = $themeInfo['theme_path'];
+
         if ($this->createSymlinks){
             $symlinks = collect($this->publicFolders)->map(function ($link) use ($theme) {
-                $origin = $this->themePath($theme . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $link);
+                $origin = $this->themePath($theme . DIRECTORY_SEPARATOR . $link);
                 $destiny = $this->publicPath($theme . DIRECTORY_SEPARATOR . $link);
 
                 if (!is_link($destiny) && (is_dir($origin))) {

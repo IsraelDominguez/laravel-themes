@@ -13,8 +13,8 @@ return array(
     'secure' => false,
     'md5'    => true,
 
-    /// Relative to base_path()
-    'themes_path' => base_path('resources'),
+    // Relative to base_path()
+    //'themes_path' => base_path('resources'),
 
     // Assets path where assets will be published, relative to Publish Path
     'assets_path' => 'assets',
