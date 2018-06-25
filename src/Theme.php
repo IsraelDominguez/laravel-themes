@@ -21,7 +21,7 @@ class Theme
      *
      * @var string
      */
-    protected $assets_path;
+    protected $publicAssetsPath;
 
     /**
      *
@@ -67,11 +67,11 @@ class Theme
     private $activeTheme = null;
 
     /**
-     * Public Folders to generate symlink
+     * Folders to generate symlink
      *
      * @var mixed|null
      */
-    private $publicFolders = null;
+    private $symlinkFolders = null;
 
     /**
      * Determine create symlinks
@@ -93,13 +93,12 @@ class Theme
         $this->finder = $finder;
         $this->lang = $lang;
 
-        $this->assetsPath = config('theme.assets_path');
-        //$this->publicPath = public_path(config($this->assetsPath));
+        $this->publicAssetsPath = config('theme.public_assets_path');
         $this->createSymlinks = config('theme.create_symlinks');
-        $this->publicFolders = config('theme.public_folders', array());
+        $this->symlinkFolders = config('theme.symlink_folders', array());
         $this->themes = config('theme.themes', array());
 
-        if (!is_dir($dir = public_path($this->assetsPath)) && false === @mkdir($dir, 0777, true)) {
+        if (!is_dir($dir = public_path($this->publicAssetsPath)) && false === @mkdir($dir, 0777, true)) {
             throw new \RuntimeException('Unable to create directory '.$dir);
         }
 
@@ -115,7 +114,7 @@ class Theme
      * @return string
      */
     public function publicPath($path = "") {
-        return public_path($this->assetsPath . DIRECTORY_SEPARATOR . $path);
+        return public_path($this->publicAssetsPath . DIRECTORY_SEPARATOR . $path);
     }
 
     /**
@@ -136,7 +135,7 @@ class Theme
      * @return string
      */
     public function assetsPath($path = ""){
-        return $this->assetsPath . DIRECTORY_SEPARATOR . $this->activeTheme . DIRECTORY_SEPARATOR . $path;
+        return $this->publicAssetsPath . DIRECTORY_SEPARATOR . $this->activeTheme . DIRECTORY_SEPARATOR . $path;
     }
 
 
@@ -149,10 +148,6 @@ class Theme
      */
     public function set($theme)
     {
-//        if (!$this->has($theme)) {
-//            throw new ThemeNotFoundException($theme);
-//        }
-
         $this->loadTheme($theme);
         $this->activeTheme = $theme;
     }
@@ -176,7 +171,7 @@ class Theme
      *
      * @return null|ThemeInfo
      */
-    public function getThemeInfo($themeName)
+    private function getThemeInfo($themeName)
     {
         // Search inf theme default config
         if (isset($this->themes[$themeName])) {
@@ -263,23 +258,26 @@ class Theme
             throw new \InvalidArgumentException('Invalid theme: '. $theme);
         }
 
+        // Load Theme Info
         $themeInfo = $this->getThemeInfo($theme);
 
         if (is_null($themeInfo)) {
             throw new \InvalidArgumentException('Invalid theme info: '. $theme);
         }
 
+        // Create Theme public folder where compiled assets will be stored
         if (!is_dir($dir = $this->publicPath($theme)) && false === @mkdir($dir, 0777, true)) {
             throw new \RuntimeException('Unable to create directory '.$dir);
         }
 
         $this->themePath = $themeInfo['theme_path'];
 
-        if ($this->createSymlinks){
-            $symlinks = collect($this->publicFolders)->map(function ($link) use ($theme) {
-                $origin = $this->themePath($theme . DIRECTORY_SEPARATOR . $link);
-                $destiny = $this->publicPath($theme . DIRECTORY_SEPARATOR . $link);
+        $assetsPath = $themeInfo['theme_assets_path'];
 
+        if ($this->createSymlinks){
+            $symlinks = collect($this->publicFolders)->map(function ($link) use ($theme, $assetsPath) {
+                $origin = $this->themePath($theme . DIRECTORY_SEPARATOR . $assetsPath . $link);
+                $destiny = $this->publicPath($theme . DIRECTORY_SEPARATOR . $link);
                 if (!is_link($destiny) && (is_dir($origin))) {
                     $this->app->make('files')->link($origin, $destiny);
                 }
