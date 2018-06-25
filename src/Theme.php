@@ -275,7 +275,7 @@ class Theme
         $assetsPath = $themeInfo['theme_assets_path'];
 
         if ($this->createSymlinks){
-            $symlinks = collect($this->publicFolders)->map(function ($link) use ($theme, $assetsPath) {
+            $symlinks = collect($this->symlinkFolders)->map(function ($link) use ($theme, $assetsPath) {
                 $origin = $this->themePath($theme . DIRECTORY_SEPARATOR . $assetsPath . $link);
                 $destiny = $this->publicPath($theme . DIRECTORY_SEPARATOR . $link);
                 if (!is_link($destiny) && (is_dir($origin))) {
