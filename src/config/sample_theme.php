@@ -2,6 +2,8 @@
 
 return array (
     'sample' => array(
+        'theme_path' => base_path('resources'),
+        'theme_assets_path' => '',
         'groups' => array(
             'main_js' => array(
                 'filters' => array(
