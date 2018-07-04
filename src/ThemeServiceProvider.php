@@ -19,9 +19,11 @@ class ThemeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__.'/config/config.php' => config_path('theme.php'),
-        ], 'config');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/config/config.php' => config_path('theme.php'),
+            ], 'config');
+        }
     }
 
     /**
@@ -32,8 +34,7 @@ class ThemeServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('theme', function ($app) {
-            $theme = new Theme($app, $this->app['view']->getFinder(), $this->app['translator']);
-            return $theme;
+            return new Theme($app, $this->app['view']->getFinder(), $this->app['translator']);
         });
 
         $this->app->singleton('asset', function($app){
