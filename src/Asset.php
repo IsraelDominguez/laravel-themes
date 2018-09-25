@@ -233,7 +233,7 @@ class Asset
     }
 
     private function getAsset($file, $type) {
-        return asset(\Theme::assetsPath($type.'/'.$file));
+        return asset(\Theme::assetsPath($type.'/'.$file), $this->secure);
     }
 
 
