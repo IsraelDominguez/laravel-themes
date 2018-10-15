@@ -17,11 +17,11 @@ return array(
     //'themes_path' => base_path('resources'),
 
     // Assets path where assets will be published, relative to Publish Path
-    'assets_path' => 'assets',
+    'public_assets_path' => 'assets',
 
     'create_symlinks' => true,
 
-    'public_folders' => array (
+    'symlink_folders' => array (
         'fonts',
         'img',
         'pdf'
