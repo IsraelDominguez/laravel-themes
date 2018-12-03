@@ -10,7 +10,7 @@
     "type": "library",
     "version": "dev-master",
     "require": {
-        "kriswallsmith/assetic": "1.*",
+        "kriswallsmith/assetic": "1.2",
         "leafo/lessphp": "^0.3.7",
         "leafo/scssphp": "~0.1",
         "meenie/javascript-packer": "^1.1",
