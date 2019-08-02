@@ -97,8 +97,8 @@ class Asset
             $cache_buster = '?'.md5_file($this->file($name));
         }
 
-        $secure = array_get($options, 'secure', $this->secure);
-        return asset($group->getTargetPath(), $secure).$cache_buster;
+        //$secure = array_get($options, 'secure', $this->secure);
+        return '/'.$group->getTargetPath().$cache_buster;
     }
 
     /**
@@ -233,7 +233,7 @@ class Asset
     }
 
     private function getAsset($file, $type) {
-        return asset(\Theme::assetsPath($type.'/'.$file), $this->secure);
+        return '/'.\Theme::assetsPath($type.'/'.$file);
     }
 
 
