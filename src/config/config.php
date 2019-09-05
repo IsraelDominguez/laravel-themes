@@ -12,6 +12,7 @@ return array(
      */
     'secure' => false,
     'md5'    => true,
+    'color' => 'cyan',
 
     // Relative to base_path()
     //'themes_path' => base_path('resources'),
@@ -45,13 +46,13 @@ return array(
         'css_min'       => 'Assetic\Filter\CssMinFilter',
         'css_import'    => 'Assetic\Filter\CssImportFilter',
         'css_rewrite'   => 'Assetic\Filter\CssRewriteFilter',
-        'embed_css'     => 'Assetic\Filter\PhpCssEmbedFilter',
+        //'embed_css'     => 'Assetic\Filter\PhpCssEmbedFilter',
         'less_php'      => 'Assetic\Filter\LessphpFilter',
-        'js_min'        => 'Assetic\Filter\JSMinFilter',
+        //'js_min'        => 'Assetic\Filter\JSMinFilter',
         'coffee_script' => 'Assetic\Filter\CoffeeScriptFilter',
-        'yui_js' => function () {
-            return new Assetic\Filter\Yui\JsCompressorFilter('yui-compressor.jar');
-        },
+//        'yui_js' => function () {
+//            return new Assetic\Filter\Yui\JsCompressorFilter('yui-compressor.jar');
+//        },
     ),
 
     /*

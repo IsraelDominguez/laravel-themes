@@ -7,7 +7,7 @@ return array (
         'groups' => array(
             'main_js' => array(
                 'filters' => array(
-                    'js_min'
+                    //'js_min'
                 ),
                 'assets' => array(
                     // Route to assets

@@ -93,7 +93,7 @@ class Asset
         $group = $this->createGroup($name);
 
         $cache_buster = '';
-        if (array_get($options, 'md5', $this->md5)) {
+        if (\Arr::get($options, 'md5', $this->md5)) {
             $cache_buster = '?'.md5_file($this->file($name));
         }
 
@@ -131,7 +131,7 @@ class Asset
                 $assets[] = $this->assets->get($asset);
             }
             // looks like a file
-            elseif (str_contains($asset, array('/', '.', '-'))) {
+            elseif (\Str::contains($asset, array('/', '.', '-'))) {
                 $assets[] = $this->parseAssetDefinition($asset);
             }
             // unknown asset
@@ -245,9 +245,9 @@ class Asset
      */
     protected function parseAssetDefinition($asset)
     {
-        if (starts_with($asset, 'http://')) {
+        if (\Str::startsWith($asset, 'http://')) {
             return new HttpAsset($asset);
-        } elseif (str_contains($asset, array('*', '?'))) {
+        } elseif (\Str::contains($asset, array('*', '?'))) {
             return new GlobAsset(\Theme::themePath(\Theme::current().'/'.$asset));
         } else {
             return new FileAsset(\Theme::themePath(\Theme::current().'/'.$asset));
